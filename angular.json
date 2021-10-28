@@ -123,6 +123,46 @@
           }
         }
       }
+    },
+    "ngx-sticky-copy": {
+      "projectType": "library",
+      "root": "projects/ngx-sticky-copy",
+      "sourceRoot": "projects/ngx-sticky-copy/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-sticky-copy/tsconfig.lib.json",
+            "project": "projects/ngx-sticky-copy/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-sticky-copy/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-sticky-copy/src/test.ts",
+            "tsConfig": "projects/ngx-sticky-copy/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-sticky-copy/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-sticky-copy/tsconfig.lib.json",
+              "projects/ngx-sticky-copy/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-sticky-copy-app"
 }

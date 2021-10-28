@@ -14,7 +14,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-sticky-copy": [
+        "dist/ngx-sticky-copy/ngx-sticky-copy",
+        "dist/ngx-sticky-copy"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
