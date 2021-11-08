@@ -1,24 +1,29 @@
-# NgxStickyCopy
+[![npm version](https://badge.fury.io/js/ngx-sticky-copy.svg)](https://badge.fury.io/js/ngx-focus-control)
+[![Build Status](https://app.travis-ci.com/Raiper34/ngx-sticky-copy.svg?branch=main)](https://app.travis-ci.com/Raiper34/ngx-focus-control)
+![npm bundle size](https://img.shields.io/bundlephobia/min/ngx-sticky-copy)
+![NPM](https://img.shields.io/npm/l/ngx-sticky-copy)
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.13.
+# Ngx-sticky-copy
+Ngx Sticky is another approach how to make elements sticky. This library allows you to make sticky even tHead. It creates sticky copy and show/hide based on scroll position.
 
-## Code scaffolding
+# Instalation
 
-Run `ng generate component component-name --project ngx-sticky-copy` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project ngx-sticky-copy`.
-> Note: Don't forget to add `--project ngx-sticky-copy` or else it will be added to the default project in your `angular.json` file. 
+`npm install ngx-sticky-copy --save`
 
-## Build
+then add `NgxFocusControlModule` into module imports
+```typescript
+import {NgxStickyCopyModule} from 'ngx-sticky-copy';
 
-Run `ng build ngx-sticky-copy` to build the project. The build artifacts will be stored in the `dist/` directory.
+@NgModule({
+// ...
+imports: [
+    // ...
+  NgxStickyCopyModule,
+    // ...
+],
+// ...
+})
+```
 
-## Publishing
-
-After building your library with `ng build ngx-sticky-copy`, go to the dist folder `cd dist/ngx-sticky-copy` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test ngx-sticky-copy` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+# Usage
+See [DEMO](https://ngx-sticky-copy.netlify.app/) app for usage.

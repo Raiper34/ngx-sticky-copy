@@ -1,6 +1,11 @@
 {
   "name": "ngx-sticky-copy",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "Ngx Sticky is another approach how to make elements sticky.",
+  "repository": "https://github.com/Raiper34/ngx-sticky-copy",
+  "homepage": "https://ngx-sticky-copy.netlify.app",
+  "keywords": ["angular", "sticky", "directives", "sticky table head"],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^9.1.13",
     "@angular/core": "^9.1.13"
