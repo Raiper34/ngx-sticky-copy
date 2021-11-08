@@ -12,58 +12,85 @@
 <section class="hero">
   <div class="hero-body">
     <div class="subtitle">
-      Ngx Sticky is another approach how to make elements sticky. This library allows you to make sticky even tHead. It creates sticky copy and show/hide based on scroll position.
+      Ngx Sticky is another approach how to make elements sticky. This library allows you to make sticky even tHead. It
+      creates sticky copy and show/hide based on scroll position.
     </div>
-    <div class="columns">
-      <div class="column">
-        <div class="box" *scSticky>
-          <div class="subtitle">
-            Simple box with applied sticky directive on it. Sticky can have defined offset
-            <span class="tag is-primary is-medium">*scSticky="500"</span>.
-          </div>
-          <article class="message">
-            <div class="message-header"><p>Code</p></div>
-            <div class="message-body">
-              <pre><code>{{stickyCode}}</code></pre>
-            </div>
-          </article>
+    <div class="container">
+      <div class="tabs is-centered is-toggle">
+        <ul>
+          <li [ngClass]="{'is-active': !showStickyHead}" (click)="toggleDemo()"><a>scSticky directive</a></li>
+          <li [ngClass]="{'is-active': showStickyHead}" (click)="toggleDemo()"><a>scStickyThead directive</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="container" *ngIf="!showStickyHead">
+      <div class="box" *scSticky>
+        <div class="subtitle">
+          Simple box with applied sticky directive on it. Sticky can have defined offset
+          <span class="tag is-primary is-medium">*scSticky="500"</span>.
         </div>
-        <div class="box">
-          <div class="subtitle">
-            Non sticky box. Ordinary box without sticky functionality.
+        <article class="message">
+          <div class="message-header"><p>Code</p></div>
+          <div class="message-body">
+            <pre><code>{{stickyCode}}</code></pre>
           </div>
+        </article>
+      </div>
+      <div class="box">
+        <div class="subtitle">
+          Non sticky box. Ordinary box without sticky functionality.
+
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis viverra diam non justo. Nam quis nulla. Nullam dapibus fermentum ipsum. Sed convallis magna eu sem. Nullam rhoncus aliquam metus. Duis condimentum augue id magna semper rutrum. Curabitur vitae diam non enim vestibulum interdum. Proin mattis lacinia justo. Curabitur sagittis hendrerit ante. Integer lacinia. Phasellus et lorem id felis nonummy placerat.</p>
+
+          <p>Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Phasellus rhoncus. Curabitur sagittis hendrerit ante. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Mauris dictum facilisis augue. Duis risus. Sed ac dolor sit amet purus malesuada congue. Donec iaculis gravida nulla. Nullam dapibus fermentum ipsum. Integer pellentesque quam vel velit. Fusce wisi. Integer pellentesque quam vel velit. In rutrum.</p>
+
+          <p>Nunc auctor. Maecenas sollicitudin. Aenean id metus id velit ullamcorper pulvinar. Maecenas aliquet accumsan leo. Nulla non lectus sed nisl molestie malesuada. Aliquam erat volutpat. Pellentesque sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla pulvinar eleifend sem. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Praesent vitae arcu tempor neque lacinia pretium. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam. Praesent dapibus.</p>
+
+          <p>Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci. Aliquam erat volutpat. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Morbi imperdiet, mauris ac auctor dictum, nisl ligula egestas nulla, et sollicitudin sem purus in lacus. Quisque porta. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Integer vulputate sem a nibh rutrum consequat. Fusce suscipit libero eget elit. Pellentesque ipsum. Mauris tincidunt sem sed arcu. Morbi scelerisque luctus velit. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Mauris elementum mauris vitae tortor. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Maecenas fermentum, sem in pharetra pellentesque, velit turpis volutpat ante, in pharetra metus odio a lectus. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Aenean vel massa quis mauris vehicula lacinia. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+          <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nullam feugiat, turpis at pulvinar vulputate, erat libero tristique tellus, nec bibendum odio risus sit amet ante. Integer imperdiet lectus quis justo. Nam sed tellus id magna elementum tincidunt. Duis risus. Nunc auctor. Aenean id metus id velit ullamcorper pulvinar. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Maecenas libero. Fusce dui leo, imperdiet in, aliquam sit amet, feugiat eu, orci.</p>
+
+          <p>Donec vitae arcu. Curabitur vitae diam non enim vestibulum interdum. Duis viverra diam non justo. Etiam posuere lacus quis dolor. Integer lacinia. Nullam eget nisl. Maecenas sollicitudin. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque ipsum. Fusce consectetuer risus a nunc.</p>
+
+          <p>Pellentesque pretium lectus id turpis. Fusce nibh. Mauris dictum facilisis augue. Phasellus et lorem id felis nonummy placerat. Fusce nibh. Nullam rhoncus aliquam metus. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Phasellus et lorem id felis nonummy placerat. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean fermentum risus id tortor. Duis pulvinar. Nulla turpis magna, cursus sit amet, suscipit a, interdum id, felis.</p>
+
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Suspendisse sagittis ultrices augue. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Nullam at arcu a est sollicitudin euismod. In enim a arcu imperdiet malesuada. Etiam dictum tincidunt diam. Nulla non arcu lacinia neque faucibus fringilla. Phasellus faucibus molestie nisl. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam egestas wisi a erat.</p>
+
+          <p>Vestibulum erat nulla, ullamcorper nec, rutrum non, nonummy ac, erat. Curabitur sagittis hendrerit ante. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Suspendisse nisl. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Cras elementum. Et harum quidem rerum facilis est et expedita distinctio. Curabitur vitae diam non enim vestibulum interdum. Integer lacinia. Cras elementum. Fusce consectetuer risus a nunc. Vivamus porttitor turpis ac leo. Nulla non lectus sed nisl molestie malesuada. Maecenas ipsum velit, consectetuer eu lobortis ut, dictum at dui. Praesent in mauris eu tortor porttitor accumsan. Nam quis nulla.</p>
+
+          <p>Morbi leo mi, nonummy eget tristique non, rhoncus non leo. Donec vitae arcu. Fusce nibh. Sed convallis magna eu sem. Pellentesque pretium lectus id turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Aliquam erat volutpat. In laoreet, magna id viverra tincidunt, sem odio bibendum justo, vel imperdiet sapien wisi sed libero. Phasellus rhoncus. Pellentesque sapien.</p>
         </div>
       </div>
+    </div>
 
-      <div class="column">
-        <div class="box">
-          <div class="subtitle">
-            Table with applied sticky thead directive. Table head sticky can have also defined offset
-            <span class="tag is-primary is-medium ">*scSticky="500"</span>.
-          </div>
-          <article class="message">
-            <div class="message-header"><p>Code</p></div>
-            <div class="message-body">
-              <pre><code>{{stickyTheadCode}}</code></pre>
-            </div>
-          </article>
-          <table class="table" *ngIf="this.data$ | async as data">
-            <thead *scStickyThead class="has-background-white">
-            <tr>
-              <th *ngFor="let column of (data[0] | keyvalue)">
-                {{column.key}}
-              </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let row of data">
-              <td *ngFor="let column of row | keyvalue">{{column.value}}</td>
-            </tr>
-            </tbody>
-          </table>
+    <div class="container" *ngIf="showStickyHead">
+      <div class="box">
+        <div class="subtitle">
+          Table with applied sticky thead directive. Table head sticky can have also defined offset
+          <span class="tag is-primary is-medium ">*scStickyThead="500"</span>.
         </div>
+        <article class="message">
+          <div class="message-header"><p>Code</p></div>
+          <div class="message-body">
+            <pre><code>{{stickyTheadCode}}</code></pre>
+          </div>
+        </article>
+        <table class="table is-fullwidth" *ngIf="this.data$ | async as data">
+          <thead *scStickyThead class="has-background-white">
+          <tr>
+            <th *ngFor="let column of (data[0] | keyvalue)">
+              {{column.key}}
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of data">
+            <td *ngFor="let column of row | keyvalue">{{column.value}}</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-
     </div>
 
   </div>
