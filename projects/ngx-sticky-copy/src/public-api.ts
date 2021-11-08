@@ -3,4 +3,5 @@
  */
 
 export * from './lib/sticky.directive';
+export * from './lib/sticky-thead.directive';
 export * from './lib/ngx-sticky-copy.module';

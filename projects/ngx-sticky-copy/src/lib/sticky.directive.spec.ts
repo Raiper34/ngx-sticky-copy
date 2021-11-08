@@ -4,7 +4,7 @@ import {By} from '@angular/platform-browser';
 import {StickyDirective} from './sticky.directive';
 
 const TEST_PAGE_HEIGHT = 10000;
-const TEST_DELAY_MS = 1000;
+const TEST_DELAY_MS = 0;
 
 @Component({
   selector: 'lib-test-component',
@@ -17,9 +17,18 @@ class TestComponent {
   pageHeight = TEST_PAGE_HEIGHT;
 }
 
+function scrollTo(
+  fixture: ComponentFixture<TestComponent>,
+  yPosition: number,
+): void {
+  window.scrollTo(0, yPosition);
+  document.dispatchEvent(new Event('scroll'));
+  fixture.detectChanges();
+}
+
 describe('StickyDirective', () => {
 
-  let componentFixture: ComponentFixture<TestComponent>;
+  let fixture: ComponentFixture<TestComponent>;
   let fixed: DebugElement;
   let sticky: DebugElement;
 
@@ -30,11 +39,10 @@ describe('StickyDirective', () => {
   }));
 
   beforeEach(() => {
-    componentFixture = TestBed.createComponent(TestComponent);
-    componentFixture.detectChanges();
-    [fixed, sticky] = componentFixture.debugElement.queryAll(By.css('.sticky'));
-    window.scrollTo(0, 0);
-    componentFixture.detectChanges();
+    fixture = TestBed.createComponent(TestComponent);
+    fixture.detectChanges();
+    [fixed, sticky] = fixture.debugElement.queryAll(By.css('.sticky'));
+    fixture.detectChanges();
   });
 
   it('should create an instance', () => {
@@ -43,36 +51,34 @@ describe('StickyDirective', () => {
   });
 
   it('should have 2 copies of element', () => {
-    const divElements = componentFixture.debugElement.queryAll(By.css('.sticky'));
+    const divElements = fixture.debugElement.queryAll(By.css('.sticky'));
     expect(divElements.length).toBe(2);
   });
 
 
   it('should have same size and position', (done) => {
-    window.scrollTo(0, TEST_PAGE_HEIGHT / 2);
-    componentFixture.detectChanges();
+    scrollTo(fixture, TEST_PAGE_HEIGHT / 2);
     setTimeout(() => {
       const fixedLeftPosition = fixed.nativeElement.getBoundingClientRect().left;
-      const stickyLeftPosition = sticky.nativeElement.getBoundingClientRect().left;
+      const stickyLeftPosition = Number(sticky.nativeElement.style.left.replace('px', ''));
       expect(stickyLeftPosition).toBe(fixedLeftPosition);
 
       const fixedWidth = fixed.nativeElement.getBoundingClientRect().width;
-      const stickyWidth = sticky.nativeElement.getBoundingClientRect().width;
+      const stickyWidth = Number(sticky.nativeElement.style.width.replace('px', ''));
       expect(stickyWidth).toBe(fixedWidth);
 
       const fixedHeight = fixed.nativeElement.getBoundingClientRect().height;
-      const stickyHeight = sticky.nativeElement.getBoundingClientRect().height;
+      const stickyHeight = Number(sticky.nativeElement.style.height.replace('px', ''));
       expect(stickyHeight).toBe(fixedHeight);
       done();
     }, TEST_DELAY_MS);
   });
 
-  it('should be only fixed visible when at the top of page', (done) => {
-    window.scrollTo(0, 0);
-    componentFixture.detectChanges();
+  it('should be fixed visible when at the top of page', (done) => {
+    scrollTo(fixture, 0);
     setTimeout(() => {
       const fixedVisibility = fixed.nativeElement.style.visibility;
-      expect(fixedVisibility).toBe('');
+      expect(fixedVisibility).toBe('visible');
 
       const stickyDisplay = sticky.nativeElement.style.display;
       expect(stickyDisplay).toBe('none');
@@ -80,9 +86,8 @@ describe('StickyDirective', () => {
     }, TEST_DELAY_MS);
   });
 
-  it('should be only sticky visible when scrolled', (done) => {
-    window.scrollTo(0, TEST_PAGE_HEIGHT / 2);
-    componentFixture.detectChanges();
+  it('should be sticky visible when scrolled', (done) => {
+    scrollTo(fixture, TEST_PAGE_HEIGHT / 2);
     setTimeout(() => {
       const fixedVisibility = fixed.nativeElement.style.visibility;
       expect(fixedVisibility).toBe('hidden');
@@ -93,13 +98,9 @@ describe('StickyDirective', () => {
     }, TEST_DELAY_MS);
   });
 
-  it('should be only sticky visible when scrolled down and then back up', (done) => {
-    window.scrollTo(0, TEST_PAGE_HEIGHT / 2);
-    componentFixture.detectChanges();
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-      componentFixture.detectChanges();
-    }, TEST_DELAY_MS / 2);
+  it('should be fixed visible when scrolled down and then back up', (done) => {
+    scrollTo(fixture, TEST_PAGE_HEIGHT / 2);
+    scrollTo(fixture, 0);
     setTimeout(() => {
       const fixedVisibility = fixed.nativeElement.style.visibility;
       expect(fixedVisibility).toBe('visible');

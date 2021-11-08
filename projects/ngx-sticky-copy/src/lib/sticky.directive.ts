@@ -10,7 +10,6 @@ import {
 import {DOCUMENT} from '@angular/common';
 
 const DEFAULT_OFFSET = 0;
-const HIDDEN_DISPLAY = 'none';
 const WATCH_PROPS = ['width', 'height', 'left'];
 
 @Directive({
@@ -44,10 +43,10 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
   protected sticky: EmbeddedViewRef<HTMLElement>;
   onScrollEventListener: () => void;
 
-  constructor(private readonly container: ViewContainerRef,
-              private readonly template: TemplateRef<HTMLElement>,
-              @Inject(DOCUMENT) private readonly document: any,
-              private readonly renderer: Renderer2) {
+  constructor(protected readonly container: ViewContainerRef,
+              protected readonly template: TemplateRef<HTMLElement>,
+              @Inject(DOCUMENT) protected readonly document: any,
+              protected readonly renderer: Renderer2) {
   }
 
   ngOnInit(): void {
@@ -66,40 +65,41 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
     }
   }
 
-  protected isSizeAndWidthSame(): boolean {
+  private isSizeAndWidthSame(): boolean {
     return WATCH_PROPS.every(prop => this.fixedClientRect[prop] === this.stickyClientRect[prop]);
   }
 
-  protected recreateElements(): void {
+  private recreateElements(): void {
     this.fixed = this.container.createEmbeddedView(this.template);
     this.sticky = this.container.createEmbeddedView(this.template);
   }
 
   protected initializeStickyStyles(): void {
     this.stickyStyle.position = 'fixed';
-    this.stickyStyle.display = HIDDEN_DISPLAY;
+    this.stickyStyle.display = 'none';
+    this.fixedStyle.visibility = 'visible';
     setTimeout(() => this.recalculateStickyStyles());
   }
 
-  protected shouldShowSticky() {
-    return this.fixedClientRect.top < this.offset && this.stickyStyle.display === HIDDEN_DISPLAY;
+  private shouldShowSticky() {
+    return this.fixedClientRect.top < this.offset && this.fixedStyle.visibility === 'visible';
   }
 
-  protected shouldHideSticky() {
-    return this.fixedClientRect.top >= this.offset && this.stickyStyle.display !== HIDDEN_DISPLAY;
+  private shouldHideSticky() {
+    return this.fixedClientRect.top >= this.offset && this.fixedStyle.visibility === 'hidden';
   }
 
-  protected showSticky(): void {
+  private showSticky(): void {
     this.stickyStyle.display = this.fixedStyle.display;
     this.fixedStyle.visibility = 'hidden';
   }
 
-  protected hideSticky(): void {
-    this.stickyStyle.display = HIDDEN_DISPLAY;
+  private hideSticky(): void {
+    this.stickyStyle.display = 'none';
     this.fixedStyle.visibility = 'visible';
   }
 
-  protected onScroll(): void {
+  private onScroll(): void {
     if (this.shouldShowSticky()) {
       this.showSticky();
     } else if (this.shouldHideSticky()) {

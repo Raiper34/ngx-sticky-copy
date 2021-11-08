@@ -1,22 +1,82 @@
-<section class="hero is-primary hero-tall">
-  <div class="hero-body">
-    <p class="title">
-      Sticky
-    </p>
-    <p class="subtitle">
-      Primary subtitle
-    </p>
+<nav class="navbar is-info" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a href="/" class="navbar-item title has-text-white	">Ngx Sticky Copy</a>
+  </div>
+  <div class="navbar-end">
+    <a class="navbar-item" href="https://github.com/Raiper34/ngx-sticky-copy">
+      <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
+    </a>
+  </div>
+</nav>
 
-    <div class="card" *scSticky="100">
-      <div class="card-content">
-        <div class="content">
-          Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at
-          eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis
-          consectetur purus sit amet fermentum.
-          <input type="text" class="input">
+<section class="hero">
+  <div class="hero-body">
+    <div class="subtitle">
+      Ngx Sticky is another approach how to made elements sticky. This library allows you to make sticky even tHead. It
+      create sticky copy and show/hide based on scroll position.
+    </div>
+    <div class="columns">
+      <div class="column">
+        <div class="box" *scSticky>
+          <div class="subtitle">
+            Simple box with applied sticky directive on it. Sticky can have defined offset
+            <span class="tag is-info is-medium">*scSticky="500"</span>.
+          </div>
+          <article class="message">
+            <div class="message-header"><p>Code</p></div>
+            <div class="message-body">
+              <pre><code>{{stickyCode}}</code></pre>
+            </div>
+          </article>
+        </div>
+        <div class="box">
+          <div class="subtitle">
+            Non sticky box. Ordinary box without sticky functionality.
+          </div>
         </div>
       </div>
+
+      <div class="column">
+        <div class="box">
+          <div class="subtitle">
+            Table with applied sticky thead directive. Table head sticky can have also defined offset
+            <span class="tag is-info is-medium ">*scSticky="500"</span>.
+          </div>
+          <article class="message">
+            <div class="message-header"><p>Code</p></div>
+            <div class="message-body">
+              <pre><code>{{stickyTheadCode}}</code></pre>
+            </div>
+          </article>
+          <table class="table" *ngIf="this.data$ | async as data">
+            <thead *scStickyThead class="has-background-white">
+            <tr>
+              <th *ngFor="let column of (data[0] | keyvalue)">
+                {{column.key}}
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let row of data">
+              <td *ngFor="let column of row | keyvalue">{{column.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
 
   </div>
 </section>
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Ngx sticky copy</strong> by <a href="https://gulan.sk">Filip Raiper34 Gulan</a>. The source code is
+      licensed
+      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+    </p>
+  </div>
+</footer>
