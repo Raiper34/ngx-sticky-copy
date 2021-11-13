@@ -29,6 +29,6 @@ imports: [
 # Usage
 See [DEMO](https://ngx-sticky-copy.netlify.app/) app for usage.
 
-#Directives
+# Directives
 - *scSticky - for all elements except table head
 - *scStickyThead - for table head element (tHead)
