@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="container" *ngIf="!showStickyHead">
-      <div class="box" *scSticky>
+      <div class="box" *scSticky="{horizontalOffset: 100, verticalOffset: 100, stickyClass: 'test'}">
         <div class="subtitle">
           Simple box with applied sticky directive on it. Sticky can have defined offset
           <span class="tag is-primary is-medium">*scSticky="500"</span>.

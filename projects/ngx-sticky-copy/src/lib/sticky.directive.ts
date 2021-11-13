@@ -10,7 +10,13 @@ import {
 import {DOCUMENT} from '@angular/common';
 
 const DEFAULT_OFFSET = 0;
-const WATCH_PROPS = ['width', 'height', 'left'];
+const DEFAULT_STICKY_CLASS = 'sticky';
+
+interface StickyConfig {
+  horizontalOffset?: number;
+  verticalOffset?: number;
+  stickyClass?: string;
+}
 
 @Directive({
   selector: '[scSticky]'
@@ -33,15 +39,24 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
     return this.sticky.rootNodes[0].getBoundingClientRect();
   }
 
-  protected get offset(): number {
-    return this.stickyOffset || DEFAULT_OFFSET;
+  protected get verticalOffset(): number {
+    return this.config?.verticalOffset || DEFAULT_OFFSET;
   }
 
-  @Input('scSticky') stickyOffset: number;
+  protected get horizontalOffset(): number {
+    return this.config?.horizontalOffset || DEFAULT_OFFSET;
+  }
+
+  private get stickyClass(): string {
+    return this.config?.stickyClass || DEFAULT_STICKY_CLASS;
+  }
+
+  @Input('scSticky') config: StickyConfig;
 
   protected fixed: EmbeddedViewRef<HTMLElement>;
   protected sticky: EmbeddedViewRef<HTMLElement>;
-  onScrollEventListener: () => void;
+  protected isStickyHidden = true;
+  private onScrollEventListener: () => void;
 
   constructor(protected readonly container: ViewContainerRef,
               protected readonly template: TemplateRef<HTMLElement>,
@@ -60,43 +75,50 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (!this.isSizeAndWidthSame()) {
+    if (!this.isSizeAndPositionProperty()) {
       this.recalculateStickyStyles();
     }
   }
 
-  private isSizeAndWidthSame(): boolean {
-    return WATCH_PROPS.every(prop => this.fixedClientRect[prop] === this.stickyClientRect[prop]);
+  private isSizeAndPositionProperty(): boolean {
+    return this.fixedClientRect.width === this.stickyClientRect.width &&
+      this.fixedClientRect.height === this.stickyClientRect.height &&
+      (this.fixedClientRect.left === this.stickyClientRect.left || this.stickyClientRect.left === this.horizontalOffset)  &&
+      (this.fixedClientRect.top === this.stickyClientRect.top || this.stickyClientRect.top === this.verticalOffset);
   }
 
   private recreateElements(): void {
     this.fixed = this.container.createEmbeddedView(this.template);
     this.sticky = this.container.createEmbeddedView(this.template);
+    this.sticky.rootNodes[0].classList.add(this.stickyClass);
   }
 
   protected initializeStickyStyles(): void {
+    this.fixedStyle.visibility = 'visible';
     this.stickyStyle.position = 'fixed';
     this.stickyStyle.display = 'none';
-    this.fixedStyle.visibility = 'visible';
+    this.isStickyHidden = true;
     setTimeout(() => this.recalculateStickyStyles());
   }
 
-  private shouldShowSticky() {
-    return this.fixedClientRect.top < this.offset && this.fixedStyle.visibility === 'visible';
+  private shouldShowSticky(): boolean {
+    return this.fixedClientRect.top < this.verticalOffset || this.fixedClientRect.left < this.horizontalOffset;
   }
 
-  private shouldHideSticky() {
-    return this.fixedClientRect.top >= this.offset && this.fixedStyle.visibility === 'hidden';
+  private shouldHideSticky(): boolean {
+    return this.fixedClientRect.top >= this.verticalOffset || this.fixedClientRect.left >= this.horizontalOffset;
   }
 
   private showSticky(): void {
     this.stickyStyle.display = this.fixedStyle.display;
     this.fixedStyle.visibility = 'hidden';
+    this.isStickyHidden = false;
   }
 
   private hideSticky(): void {
     this.stickyStyle.display = 'none';
     this.fixedStyle.visibility = 'visible';
+    this.isStickyHidden = true;
   }
 
   private onScroll(): void {
@@ -108,8 +130,10 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
   }
 
   protected recalculateStickyStyles(): void {
-    WATCH_PROPS.forEach(prop => this.stickyStyle[prop] = `${this.fixedClientRect[prop]}px`);
-    this.stickyStyle.top = `${this.offset}px`;
+    this.stickyStyle.width = `${this.fixedClientRect.width}px`;
+    this.stickyStyle.height = `${this.fixedClientRect.height}px`;
+    this.stickyStyle.left = `${Math.max(this.horizontalOffset, this.fixedClientRect.left)}px`;
+    this.stickyStyle.top = `${Math.max(this.verticalOffset, this.fixedClientRect.top)}px`;
   }
 
 }

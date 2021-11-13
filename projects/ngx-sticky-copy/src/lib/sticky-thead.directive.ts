@@ -1,15 +1,21 @@
-import {Directive, Inject, Input, Renderer2, TemplateRef, ViewContainerRef} from '@angular/core';
+import {Directive, HostListener, Inject, Input, Renderer2, TemplateRef, ViewContainerRef} from '@angular/core';
 import {StickyDirective} from './sticky.directive';
 import {DOCUMENT} from '@angular/common';
 
 const TH_SELECTOR = 'tr th';
+
+interface StickyConfig {
+  horizontalOffset?: number;
+  verticalOffset?: number;
+  stickyClass?: string;
+}
 
 @Directive({
   selector: '[scStickyThead]'
 })
 export class StickyTheadDirective extends StickyDirective {
 
-  @Input('scStickyThead') stickyOffset: number;
+  @Input('scStickyThead') stickyOffset: StickyConfig;
 
   constructor(protected readonly container: ViewContainerRef,
               protected readonly template: TemplateRef<HTMLElement>,
