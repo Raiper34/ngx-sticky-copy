@@ -8,15 +8,10 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
+import {StickyConfig} from './sticky-config';
 
 const DEFAULT_OFFSET = 0;
 const DEFAULT_STICKY_CLASS = 'sticky';
-
-interface StickyConfig {
-  horizontalOffset?: number;
-  verticalOffset?: number;
-  stickyClass?: string;
-}
 
 @Directive({
   selector: '[scSticky]'
@@ -55,7 +50,6 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
 
   protected fixed: EmbeddedViewRef<HTMLElement>;
   protected sticky: EmbeddedViewRef<HTMLElement>;
-  protected isStickyHidden = true;
   private onScrollEventListener: () => void;
 
   constructor(protected readonly container: ViewContainerRef,
@@ -75,12 +69,10 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (!this.isSizeAndPositionProperty()) {
-      this.recalculateStickyStyles();
-    }
+    !this.isSizeAndPositionValid() && this.recalculateStickyStyles();
   }
 
-  private isSizeAndPositionProperty(): boolean {
+  private isSizeAndPositionValid(): boolean {
     return this.fixedClientRect.width === this.stickyClientRect.width &&
       this.fixedClientRect.height === this.stickyClientRect.height &&
       (this.fixedClientRect.left === this.stickyClientRect.left || this.stickyClientRect.left === this.horizontalOffset)  &&
@@ -97,7 +89,6 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
     this.fixedStyle.visibility = 'visible';
     this.stickyStyle.position = 'fixed';
     this.stickyStyle.display = 'none';
-    this.isStickyHidden = true;
     setTimeout(() => this.recalculateStickyStyles());
   }
 
@@ -112,13 +103,11 @@ export class StickyDirective implements OnInit, OnDestroy, DoCheck {
   private showSticky(): void {
     this.stickyStyle.display = this.fixedStyle.display;
     this.fixedStyle.visibility = 'hidden';
-    this.isStickyHidden = false;
   }
 
   private hideSticky(): void {
     this.stickyStyle.display = 'none';
     this.fixedStyle.visibility = 'visible';
-    this.isStickyHidden = true;
   }
 
   private onScroll(): void {

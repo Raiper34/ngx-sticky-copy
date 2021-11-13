@@ -1,14 +1,9 @@
 import {Directive, HostListener, Inject, Input, Renderer2, TemplateRef, ViewContainerRef} from '@angular/core';
 import {StickyDirective} from './sticky.directive';
 import {DOCUMENT} from '@angular/common';
+import {StickyConfig} from './sticky-config';
 
 const TH_SELECTOR = 'tr th';
-
-interface StickyConfig {
-  horizontalOffset?: number;
-  verticalOffset?: number;
-  stickyClass?: string;
-}
 
 @Directive({
   selector: '[scStickyThead]'

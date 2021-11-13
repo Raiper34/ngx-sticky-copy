@@ -9,7 +9,7 @@
   </div>
 </nav>
 
-<section class="hero">
+<section class="container">
   <div class="hero-body">
     <div class="subtitle">
       Ngx Sticky is another approach how to make elements sticky. This library allows you to make sticky even tHead. It
@@ -25,10 +25,36 @@
       </div>
     </div>
     <div class="container" *ngIf="!showStickyHead">
-      <div class="box" *scSticky="{horizontalOffset: 100, verticalOffset: 100, stickyClass: 'test'}">
-        <div class="subtitle">
-          Simple box with applied sticky directive on it. Sticky can have defined offset
-          <span class="tag is-primary is-medium">*scSticky="500"</span>.
+      <div class="box has-background-primary-light" *scSticky>
+        <div>
+          Simple box with applied sticky directive on it. You can also pass config to this directive
+          <span class="tag is-dark is-medium">*scSticky="config"</span>.
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Default Value</th>
+                <th>Optional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>horizontalOffset</td>
+                <td>0</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>verticalOffset</td>
+                <td>0</td>
+                <td>Yes</td>
+              </tr>
+              <tr>
+                <td>stickyClass</td>
+                <td>sticky</td>
+                <td>Yes</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
         <article class="message">
           <div class="message-header"><p>Code</p></div>
@@ -38,8 +64,9 @@
         </article>
       </div>
       <div class="box">
-        <div class="subtitle">
-          Non sticky box. Ordinary box without sticky functionality.
+        <div>
+          <p class="subtitle">Content</p>
+          <p>Non sticky box. Ordinary box without sticky functionality.</p>
 
           <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis viverra diam non justo. Nam quis nulla. Nullam dapibus fermentum ipsum. Sed convallis magna eu sem. Nullam rhoncus aliquam metus. Duis condimentum augue id magna semper rutrum. Curabitur vitae diam non enim vestibulum interdum. Proin mattis lacinia justo. Curabitur sagittis hendrerit ante. Integer lacinia. Phasellus et lorem id felis nonummy placerat.</p>
 
@@ -65,10 +92,11 @@
     </div>
 
     <div class="container" *ngIf="showStickyHead">
-      <div class="box">
-        <div class="subtitle">
-          Table with applied sticky thead directive. Table head sticky can have also defined offset
-          <span class="tag is-primary is-medium ">*scStickyThead="500"</span>.
+      <div class="box has-background-primary-light">
+        <div>
+          Table with applied sticky thead directive. You can also pass same config to this directive
+          <span class="tag is-dark is-medium ">*scStickyThead="config"</span>.
+          It modifies tHead display property to <strong>'block'</strong> and th display property to <strong>'inline-block'</strong> of sticky copy.
         </div>
         <article class="message">
           <div class="message-header"><p>Code</p></div>
