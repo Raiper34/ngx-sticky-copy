@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
-const MOCK_API_ENDPOINT = 'https://61801edb8bfae60017adf9b7.mockapi.io/data';
+const MOCK_API_ENDPOINT = 'https://61917d5741928b001769007d.mockapi.io/users';
 
 @Component({
   selector: 'app-root',
