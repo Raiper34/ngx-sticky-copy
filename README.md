@@ -1,5 +1,5 @@
 [![npm version](https://badge.fury.io/js/ngx-sticky-copy.svg)](https://badge.fury.io/js/ngx-sticky-copy)
-[![Build Status](https://app.travis-ci.com/Raiper34/ngx-sticky-copy.svg?branch=main)](https://app.travis-ci.com/Raiper34/ngx-sticky-copy)
+[![CircleCi](https://circleci.com/gh/Raiper34/ngx-sticky-copy.svg?style=shield)](https://app.circleci.com/pipelines/github/Raiper34/ngx-sticky-copy)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/ngx-sticky-copy)
 ![NPM](https://img.shields.io/npm/l/ngx-sticky-copy)
 [![demo](https://badgen.net/badge/demo/online/orange)](https://ngx-sticky-copy.netlify.app/)

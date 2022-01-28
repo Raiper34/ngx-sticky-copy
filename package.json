@@ -14,7 +14,6 @@
     "lint:lib": "ng lint ngx-sticky-copy",
     "lint:lib:fix": "ng lint ngx-sticky-copy --fix",
     "e2e": "ng e2e",
-    "changelog": "cd projects/ngx-sticky-copy && changelog generate && cd ..",
     "deploy": "npm run build && netlify deploy --dir=dist/ngx-sticky-copy-app --prod",
     "publish": "npm run changelog && npm run build:lib && cd dist/ngx-sticky-copy && npm publish"
   },
@@ -43,7 +42,6 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
-    "generate-changelog": "^1.8.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
